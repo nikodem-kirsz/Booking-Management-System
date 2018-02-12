@@ -1,0 +1,64 @@
+<%= simple_form_for(@reservation) do |f| %>
+  <%= f.error_notification %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to 'Back', reservations_path, :class => 'btn btn-default' %>
+  </div>
+  <br>
+  <div class="form-inputs">
+    <div class="form-group col-lg-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          Informacje o rezerwacji
+        </div>
+        <div class="panel-body">
+          <%= f.input :numer, label: 'Numer referencyjny', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :status, label: 'Status rezerwacji', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :zrodlo, label: 'Źródło rezerwacji', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :kwota, label: 'Kwota do zapłaty', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :komentarz , label: 'Komentarz', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :sprzatanie, label: 'Komentarz dla osoby sprzatajacej', input_html: { class: 'form-control input-sm' } %>
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group col-lg-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          Zakwaterowanie klienta
+        </div>
+        <div class="panel-body">
+          <%= f.input :data_zakwaterowania, label: 'Data zakwaterowania', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :godzina_zakwaterowania , label: 'Godzina zakwaterowania', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :data_wykwaterowania, label: 'Data wykwaterowania', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :godzina_wykwaterowania, label: 'Godzina wykwaterowania', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :apartament, label: 'Apartament', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :ilosc_osob , label: 'Ilość osób do zakwaterowania', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :klient , label: 'Klient', input_html: { class: 'form-control input-sm' } %>
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group col-lg-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          Szczegóły zakwaterowania
+        </div>
+        <div class="panel-body">
+          <%= f.input :pracownik, label: 'Pracownik odpowiedzialny za zakwaterowanie', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :godzina_przylotu , label: 'Godzina przylotu', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :numer_przylotu, label: 'Numer przylotu', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :komentarz_do_transportu_na_lotnisko, label: 'Komentarz do transportu z lotniska', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :godzina_wylotu, label: 'Godzina wylotu', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :numer_wylotu , label: 'Numer wylotu', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :komentarz_do_transportu_na_lotnisko, label: 'Komentarz do transportu na lotnisko', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :komentarz_do_wycieczek , label: 'Komentarz do wycieczek', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :oferte_wprowadzil, label: 'Ofertę wprowadził', input_html: { class: 'form-control input-sm' } %>
+          <%= f.input :data_wprowadzenia , label: 'Data wprowadzenia do systemu', input_html: { class: 'form-control input-sm' } %>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+<% end %>

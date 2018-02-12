@@ -10,7 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203184643) do
+ActiveRecord::Schema.define(version: 20180212220308) do
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer "numer"
+    t.string "status"
+    t.string "zrodlo"
+    t.integer "kwota"
+    t.text "komentarz"
+    t.text "sprzatanie"
+    t.date "data_zakwaterowania"
+    t.time "godzina_zakwaterowania"
+    t.date "data_wykwaterowania"
+    t.time "godzina_wykwaterowania"
+    t.string "apartament"
+    t.integer "ilosc_osob"
+    t.string "pracownik"
+    t.string "klient"
+    t.time "godzina_przylotu"
+    t.integer "numer_przylotu"
+    t.text "komentarz_do_transportu_z_lotniska"
+    t.time "godzina_wylotu"
+    t.time "numer_wylotu"
+    t.text "komentarz_do_transportu_na_lotnisko"
+    t.text "komentarz_do_wycieczek"
+    t.string "oferte_wprowadzil"
+    t.date "data_wprowadzenia"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,6 +53,7 @@ ActiveRecord::Schema.define(version: 20180203184643) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "imie"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
