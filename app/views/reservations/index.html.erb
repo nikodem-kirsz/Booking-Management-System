@@ -11,8 +11,10 @@
       <th>Numer</th>
       <th>Status</th>
       <th>Zrodlo</th>
-      <th>Data zakwaterowania</th>
-      <th>Data wykwaterowania</th>
+      <th><span class="glyphicon glyphicon-calendar"></span></th>
+      <th><span class="glyphicon glyphicon-log-in"></span></th>
+      <th><span class="glyphicon glyphicon-calendar"></span></th>
+      <th><span class="glyphicon glyphicon-log-out"></span></th>
       <th>Apartament</th>
       <th>Klient</th>
       <th><span class="glyphicon glyphicon-user"></span></th>
@@ -32,7 +34,9 @@
         <td><%= reservation.status %></td>
         <td><%= reservation.zrodlo %></td>
         <td><%= reservation.data_zakwaterowania %></td>
+        <td><%= reservation.godzina_zakwaterowania.to_s(:time) %></td>
         <td><%= reservation.data_wykwaterowania %></td>
+        <td><%= reservation.godzina_wykwaterowania.to_s(:time) %></td>
         <td><%= reservation.apartament %></td>
         <td><%= reservation.klient %></td>
         <td><%= reservation.ilosc_osob %></td>
@@ -42,7 +46,7 @@
         <td><%= reservation.kwota %></td>
         <td><%= reservation.kwota %></td>
 
-        <td><%= link_to '', reservation, :class => 'glyphicon glyphicon-download-alt' %></td>
+        <td><%= link_to '', reservation_path(reservation, :format => 'pdf') , :class => 'glyphicon glyphicon-download-alt' %></td>
         <td><%= link_to '', reservation, :class => 'glyphicon glyphicon-envelope' %></td>
         <td><%= link_to '', reservation, :class => 'glyphicon glyphicon-edit' %></td>
         <td><%= link_to '', edit_reservation_path(reservation), :class => 'glyphicon glyphicon-edit' %></td>

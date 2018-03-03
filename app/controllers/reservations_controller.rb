@@ -10,6 +10,14 @@ class ReservationsController < ApplicationController
   # GET /reservations/1
   # GET /reservations/1.json
   def show
+    @reservation = Reservation.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ReservationPdf.new(@reservation)
+        send_data pdf.render, filename: "Invoice 1", type: "application/pdf", disposition: "inline"
+      end
+    end
   end
 
   # GET /reservations/new
