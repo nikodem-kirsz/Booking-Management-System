@@ -87,7 +87,7 @@ class ReservationPdf < Prawn::Document
 
   def personal_information
     [
-        ['NAZWA I ADRES LOKALU / ADRESS OF THE APARTMENT', @reservation.id],
+        ['NAZWA I ADRES LOKALU / ADDRESS OF THE APARTMENT', @reservation.id],
         ['NUMER REZERWACJI / BOOKING NUMBER', @reservation.numer],
         ['OSOBA REZERWUJACA / BOOKING PERSON', @reservation.klient],
         ['NR DOWODU / ID NUMBER', '421411'],

@@ -47,7 +47,7 @@
         <td><%= reservation.kwota %></td>
 
         <td><%= link_to '', reservation_path(reservation, :format => 'pdf') , :class => 'glyphicon glyphicon-download-alt' %></td>
-        <td><%= link_to '', reservation, :class => 'glyphicon glyphicon-envelope' %></td>
+        <td><%= link_to '', faktura_reservation_path(reservation, :format => 'pdf'), :class => 'glyphicon glyphicon-envelope' %></td>
         <td><%= link_to '', reservation, :class => 'glyphicon glyphicon-edit' %></td>
         <td><%= link_to '', edit_reservation_path(reservation), :class => 'glyphicon glyphicon-edit' %></td>
         <td><%= link_to '', reservation, method: :delete, data: { confirm: 'Na pewno chcesz wykasować tą rezerwacje?' }, :class => 'glyphicon glyphicon-trash' %></td>

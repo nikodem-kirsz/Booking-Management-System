@@ -15,7 +15,17 @@ class ReservationsController < ApplicationController
       format.html
       format.pdf do
         pdf = ReservationPdf.new(@reservation)
-        send_data pdf.render, filename: "Invoice 1", type: "application/pdf", disposition: "inline"
+        send_data pdf.render, filename: "Reservation Card #{@reservation.numer}", type: "application/pdf", disposition: "inline"
+      end
+    end
+  end
+
+  def invoice
+    @reservation = Reservation.find(params[:id])
+    respond_to do |format|
+      format.pdf do
+        pdf = InvoicePdf.new(@reservation)
+        send_data pdf.render, filename: "Invoice #{@reservation.numer}", type: "application/pdf", disposition: "inline"
       end
     end
   end
