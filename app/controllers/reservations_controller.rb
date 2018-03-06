@@ -4,7 +4,12 @@ class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = Reservation.all
+    search = params[:search].present? ? params[:search] : nil
+    @reservations = if search
+                      Reservation.search(search)
+                    else
+                      Reservation.all
+                    end
   end
 
   # GET /reservations/1

@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 40.times do |n|
-  Reservation.create(numer: Faker::Number.number(5),
+  Reservation.create(numer: Faker::Number.number(5).to_str,
                      status: 'aktualne',
                      zrodlo: ['booking.com', 'airbnb.com', 'manual'].sample,
                      kwota: Faker::Number.number(3),
@@ -22,10 +22,10 @@
                      pracownik: ['Bartek Kirsz', 'Nikodem Kirsz', 'Anna Kirsz'].sample,
                      klient: Faker::Name.name,
                      godzina_przylotu: Faker::Time.between(DateTime.now + 1, DateTime.now),
-                     numer_przylotu: Faker::Number.number(3),
+                     numer_przylotu: Faker::Number.number(3).to_str,
                      komentarz_do_transportu_z_lotniska: Faker::Lorem.paragraph(2),
                      godzina_wylotu: Faker::Time.forward(23, :morning),
-                     numer_wylotu: Faker::Number.number(3),
+                     numer_wylotu: Faker::Number.number(3).to_str,
                      komentarz_do_transportu_na_lotnisko: Faker::Lorem.paragraph(2),
                      komentarz_do_wycieczek: Faker::Lorem.paragraph(2),
                      oferte_wprowadzil: ['Bartek Kirsz', 'Nikodem Kirsz', 'Anna Kirsz'].sample,

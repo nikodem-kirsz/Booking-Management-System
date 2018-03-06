@@ -14,6 +14,12 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+          <%= form_tag reservations_path, method: :get, class: "navbar-form navbar-left", role: "search" do %>
+            <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Szukaj rezerwacji..."  %>
+            <%= submit_tag "Go!", name: nil, class: "btn btn-default" %>
+          <% end %>
+        </li>
+        <li>
            <%= link_to("Zalogowany jako #{User.find(session["warden.user.user.key"][0][0]).email}", edit_user_registration_path) %>
         </li>
         <li>
@@ -32,6 +38,12 @@
       <ul class="nav navbar-nav navbar-right">
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li>
+          <%= form_tag reservations_path, method: :get, class: "navbar-form navbar-left", role: "search" do %>
+            <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Szukaj rezerwacji..."  %>
+            <%= submit_tag "Go!", name: nil, class: "btn btn-default" %>
+          <% end %>
+        </li>
         <li>
           <%= link_to "Logowanie", new_user_session_path %>
         </li>

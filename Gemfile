@@ -40,6 +40,7 @@ gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in developm
 gem 'prawn', '~> 2.1'
 gem 'prawn-table', '~> 0.2.2'
 gem 'responders', '~> 2.3'
+gem 'searchkick'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
