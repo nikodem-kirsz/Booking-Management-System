@@ -6,10 +6,10 @@
   <%= link_to 'Nowa rezerwacja', new_reservation_path, :class => "btn btn-default" %>
 
   <%= form_tag '/' do %>
-    <%= text_field_tag :apartament, params[:apartament] %>
-    <%= text_field_tag :zrodlo, params[:zrodlo] %>
-    <%= text_field_tag :oferte_wprowadzil, params[:oferte_wprowadzil] %>
-    <%= text_field_tag :pracownik, params[:pracownik] %>
+    <%= select_tag :apartament, options_for_select(@apartamenty.unshift('--Wszystkie--'), params[:apartament])%>
+    <%= select_tag :zrodlo, options_for_select(@zrodla.unshift('--Wszystkie--'), params[:zrodlo]) %>
+    <%= select_tag :oferte_wprowadzil, options_for_select(@pracownicy.unshift('--Wszystkie--'), params[:oferte_wprowadzil]) %>
+    <%= select_tag :pracownik, options_for_select(@pracownicy, params[:pracownik]) %>
     <%= submit_tag 'Search' %>
   <% end %>
 

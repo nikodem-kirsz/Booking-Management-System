@@ -5,7 +5,7 @@ class ReservationsController < ApplicationController
   # GET /reservations.json
   def index
     @zrodla = Reservation.distinct.pluck(:zrodlo)
-    @apartamenty = Reservation.distinct.pluck(:apartament)
+    @apartamenty = Reservation.joins(:apartament).distinct.pluck(:adres)
     @pracownicy = Reservation.distinct.pluck(:pracownik)
     search = params[:search].present? ? params[:search] : nil
     filters = FILERS.each {|filter| params[filter].present? ? true : nil}
