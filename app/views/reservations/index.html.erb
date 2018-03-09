@@ -1,20 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <div style="margin: auto; width: 90%">
-  <%= render 'layouts/filters' %>
   <h3>Reserwacje</h3>
+  <%= render 'layouts/filters' %>
+  <br>
   <%= link_to 'Nowa rezerwacja', new_reservation_path, :class => "btn btn-default" %>
-
-  <%= form_tag '/' do %>
-    <%= select_tag :apartament, options_for_select(@apartamenty.unshift('--Wszystkie--'), params[:apartament])%>
-    <%= select_tag :zrodlo, options_for_select(@zrodla.unshift('--Wszystkie--'), params[:zrodlo]) %>
-    <%= select_tag :oferte_wprowadzil, options_for_select(@pracownicy.unshift('--Wszystkie--'), params[:oferte_wprowadzil]) %>
-    <%= select_tag :pracownik, options_for_select(@pracownicy, params[:pracownik]) %>
-    <%= submit_tag 'Search' %>
-  <% end %>
-
-  <%= link_to "Advanced Search", new_search_path %>
-
+  <br>
   <table class="table table-striped table-hover table-bordered">
 
     <thead class="thead-inverse">

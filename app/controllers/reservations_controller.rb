@@ -7,6 +7,7 @@ class ReservationsController < ApplicationController
     @zrodla = Reservation.distinct.pluck(:zrodlo)
     @apartamenty = Reservation.joins(:apartament).distinct.pluck(:adres)
     @pracownicy = Reservation.distinct.pluck(:pracownik)
+    @statusy = Reservation.distinct.pluck(:status)
     search = params[:search].present? ? params[:search] : nil
     filters = FILERS.each {|filter| params[filter].present? ? true : nil}
     @reservations = if search

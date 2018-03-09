@@ -1,129 +1,33 @@
-<div class="col-lg-12">
-    <div class="form-group col-lg-2">
-      <label class="control-label" for="SelectedDropDownItemApartemntsDict">Apartamenty</label>
-      <select class="form-control input-sm valid" data-val="true" data-val-number="The field Apartamenty must be a number." data-val-required="The Apartamenty field is required." id="SelectedDropDownItemApartemntsDict" name="SelectedDropDownItemApartemntsDict"><option value="2">ul. Czapskich 1/29</option>
-        <option value="7">ul. Floriańska 16/7</option>
-        <option selected="selected" value="0">- Wszystkie -</option>
-      </select>
-    </div>
-
-    <div class="form-group col-lg-2">
-      <label class="control-label" for="SelectedDropDownItemSourcesDict">Źródła rezerwacji</label>
-      <select class="form-control input-sm valid" data-val="true" data-val-number="The field Źródła rezerwacji must be a number." data-val-required="The Źródła rezerwacji field is required." id="SelectedDropDownItemSourcesDict" name="SelectedDropDownItemSourcesDict"><option value="1">Booking</option>
-        <option value="2">Bezpośrednia</option>
-        <option value="3">airbnb</option>
-        <option value="4">Expedia</option>
-        <option selected="selected" value="0">- Wszystkie -</option>
-      </select>
-    </div>
-
-    <div class="form-group col-lg-2">
-      <label class="control-label" for="SelectedDropDownItemStatusesDict">Statusy</label>
-      <select class="form-control input-sm valid" data-val="true" data-val-number="The field Statusy must be a number." data-val-required="The Statusy field is required." id="SelectedDropDownItemStatusesDict" name="SelectedDropDownItemStatusesDict"><option value="1">Rezerwacja</option>
-        <option value="2">Zakwaterowanie</option>
-        <option value="3">Wykwaterowanie</option>
-        <option value="4">Anulowanie</option>
-        <option value="5">Wycofana</option>
-        <option value="6">Rozliczony</option>
-        <option selected="selected" value="0">- Wszystkie -</option>
-      </select>
-    </div>
-
-
-    <div class="form-group col-lg-2">
-      <label class="control-label" for="SelectedDropDownItemEnteredByDict">Wprowadzone przez:</label>
-      <select class="form-control input-sm valid" data-val="true" data-val-number="The field Wprowadzone przez: must be a number." data-val-required="The Wprowadzone przez: field is required." id="SelectedDropDownItemEnteredByDict" name="SelectedDropDownItemEnteredByDict"><option value="2">Przemyslaw Wawrzyniak</option>
-        <option value="3">Bartosz Bałaga</option>
-
-      </select>
-    </div>
-
-    <div class="form-group col-lg-2">
-      <label class="control-label" for="SelectedDropDownItemEmployeeResponsible">Odpowiedzialny pracownik:</label>
-      <select class="form-control input-sm valid" data-val="true" data-val-number="The field Odpowiedzialny pracownik: must be a number." data-val-required="The Odpowiedzialny pracownik: field is required." id="SelectedDropDownItemEmployeeResponsible" name="SelectedDropDownItemEmployeeResponsible"><option value="2">Przemyslaw Wawrzyniak</option>
-        <option value="3">Bartosz Bałaga</option>
-        <option selected="selected" value="0">- Wszyscy -</option>
-      </select>
-    </div>
-  </div>
+<%= form_tag '/' do %>
   <div class="col-lg-12">
     <div class="form-group col-lg-2">
-      <label class="control-label" for="ReservationsFrom">Data zakwaterowania od</label>
-      <div class="input-group date" id="datetimepickerfrom">
-        <input class="form-control input-sm" id="ReservationsFrom" name="ReservationsFrom" placeholder="Data zakwaterowania od" type="text" value="">
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
+      <label class="control-label">Apartamenty</label>
+      <%= select_tag :apartament, options_for_select(@apartamenty.unshift('--Wszystkie--'), params[:apartament]), :class => 'form-control input-sm valid' %>
     </div>
-
     <div class="form-group col-lg-2">
-      <label class="control-label" for="ReservationsTo">Data zakwaterowania do</label>
-      <div class="input-group date" id="datetimepickerto">
-        <input class="form-control input-sm" id="ReservationsTo" name="ReservationsTo" placeholder="Data rezerwacji do" type="text" value="">
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
+      <label class="control-label">Zrodla rezerwacji</label>
+      <%= select_tag :zrodlo, options_for_select(@zrodla.unshift('--Wszystkie--'), params[:zrodlo]), :class => 'form-control input-sm valid' %>
     </div>
-
     <div class="form-group col-lg-2">
-      <label class="control-label" for="ReservationsFinishFrom">Data wykwaterowania od</label>
-      <div class="input-group date" id="datetimepickertoFinishFrom">
-        <input class="form-control input-sm" id="ReservationsFinishFrom" name="ReservationsFinishFrom" placeholder="Data wykwaterowania od" type="text" value="">
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
+      <label class="control-label">Statusy</label>
+      <%= select_tag :status, options_for_select(@statusy.unshift('--Wszystkie--'), params[:status]), :class => 'form-control input-sm valid' %>
     </div>
-
     <div class="form-group col-lg-2">
-      <label class="control-label" for="ReservationsFinishTo">Data wykwaterowania do</label>
-      <div class="input-group date" id="datetimepickertoFinishTo">
-        <input class="form-control input-sm" id="ReservationsFinishTo" name="ReservationsFinishTo" placeholder="Data wykwaterowania do" type="text" value="">
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
+      <label class="control-label">Wprowadzone przez</label>
+      <%= select_tag :oferte_wprowadzil, options_for_select(@pracownicy.unshift('--Wszystkie--'), params[:oferte_wprowadzil]), :class => 'form-control input-sm valid' %>
     </div>
-
     <div class="form-group col-lg-2">
-      <label class="control-label" for="ReservationsDateIn">Data zakwaterowania</label>
-      <div class="input-group date" id="datetimepickertoDateIn">
-        <input class="form-control input-sm" id="ReservationsDateIn" name="ReservationsDateIn" placeholder="Data zakwaterowania" type="text" value="">
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
+      <label class="control-label">Odpowiedzialny pracownik</label>
+      <%= select_tag :pracownik, options_for_select(@pracownicy, params[:pracownik]), :class => 'form-control input-sm valid' %>
     </div>
-
     <div class="form-group col-lg-2">
-      <label class="control-label" for="ReservationsDateOut">Data wykwaterowania</label>
-      <div class="input-group date" id="datetimepickertoDateOut">
-        <input class="form-control input-sm" id="ReservationsDateOut" name="ReservationsDateOut" placeholder="Data wykwaterowania" type="text" value="">
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
+      <label class="control-label">Odpowiedzialny pracownik</label>
+      <%= date_field :pracownik, :class => 'form-control input-sm valid' %>
     </div>
-
     <div class="form-group col-lg-2">
-      <label class="control-label" for="ReservationsIssueDateFrom">Data wprowadzenia od</label>
-      <div class="input-group date" id="datetimepickertoIssueDateFrom">
-        <input class="form-control input-sm" id="ReservationsIssueDateFrom" name="ReservationsIssueDateFrom" placeholder="Data zakwaterowania" type="text" value="">
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
+      <label class="control-label">Odpowiedzialny pracownik</label>
+      <%= select_tag :pracownik, options_for_select(@pracownicy, params[:pracownik]), :class => 'form-control input-sm valid' %>
     </div>
-
-    <div class="form-group col-lg-2">
-      <label class="control-label" for="ReservationsIssueDateTo">Data wprowadzenia do</label>
-      <div class="input-group date" id="datetimepickertoIssueDateTo">
-        <input class="form-control input-sm" id="ReservationsIssueDateTo" name="ReservationsIssueDateTo" placeholder="Data zakwaterowania" type="text" value="">
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
-    </div>
-</div>
+  </div>
+  <%= submit_tag 'Search' %>
+<% end %>
