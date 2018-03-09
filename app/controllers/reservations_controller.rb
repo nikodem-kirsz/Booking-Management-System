@@ -1,16 +1,26 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
-
+  FILERS = [:search, :keywords, :apartament, :zrodlo, :status, :oferte_wprowadzil, :pracownik, :data_zakwaterowania_od, :data_zakwaterowania_do, :data_wykwaterowania_od, :data_wykwaterowania_do]
   # GET /reservations
   # GET /reservations.json
   def index
-    @all_reservations = Reservation.all
+    @zrodla = Reservation.distinct.pluck(:zrodlo)
+    @apartamenty = Reservation.distinct.pluck(:apartament)
+    @pracownicy = Reservation.distinct.pluck(:pracownik)
     search = params[:search].present? ? params[:search] : nil
+    filters = FILERS.each {|filter| params[filter].present? ? true : nil}
     @reservations = if search
                       Reservation.search(search)
+                    elsif filters
+                           Reservation.search_reservations(search_params)
                     else
                       Reservation.all
                     end
+    # if(params[:search])
+    #   @reservations = Reservation.search_reservations(params[:search])
+    # else
+    #   @reservations = Reservation.all
+    # end
   end
 
   # GET /reservations/1
@@ -94,5 +104,9 @@ class ReservationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
       params.require(:reservation).permit(:numer, :status, :zrodlo, :kwota, :komentarz, :sprzatanie, :data_zakwaterowania, :godzina_zakwaterowania, :data_wykwaterowania, :godzina_wykwaterowania, :apartament, :ilosc_osob)
+    end
+
+    def search_params
+      params.permit(:search, :keywords, :apartament, :zrodlo, :status, :oferte_wprowadzil, :pracownik, :data_zakwaterowania_od, :data_zakwaterowania_do, :data_wykwaterowania_od, :data_wykwaterowania_do)
     end
 end

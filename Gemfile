@@ -41,6 +41,7 @@ gem 'prawn', '~> 2.1'
 gem 'prawn-table', '~> 0.2.2'
 gem 'responders', '~> 2.3'
 gem 'searchkick'
+gem 'bootstrap-datepicker-rails', '~> 1.6', '>= 1.6.1.1'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

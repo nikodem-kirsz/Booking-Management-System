@@ -1,31 +1,12 @@
-<p id="notice"><%= notice %></p>
-
-<div style="margin: auto; width: 90%">
-  <%= render 'layouts/filters' %>
-  <h3>Reserwacje</h3>
-  <%= link_to 'Nowa rezerwacja', new_reservation_path, :class => "btn btn-default" %>
-
-  <%= form_tag '/' do %>
-    <%= text_field_tag :apartament, params[:apartament] %>
-    <%= text_field_tag :zrodlo, params[:zrodlo] %>
-    <%= text_field_tag :oferte_wprowadzil, params[:oferte_wprowadzil] %>
-    <%= text_field_tag :pracownik, params[:pracownik] %>
-    <%= submit_tag 'Search' %>
-  <% end %>
-
-  <%= link_to "Advanced Search", new_search_path %>
-
+<div id="filterrific_results">
   <table class="table table-striped table-hover table-bordered">
-
     <thead class="thead-inverse">
     <tr>
       <th>Numer</th>
       <th>Status</th>
       <th>Zrodlo</th>
-      <th><span class="glyphicon glyphicon-calendar"></span></th>
-      <th><span class="glyphicon glyphicon-log-in"></span></th>
-      <th><span class="glyphicon glyphicon-calendar"></span></th>
-      <th><span class="glyphicon glyphicon-log-out"></span></th>
+      <th>Zakwaterowanie</th>
+      <th>Wykwaterowanie</th>
       <th>Apartament</th>
       <th>Klient</th>
       <th><span class="glyphicon glyphicon-user"></span></th>
@@ -44,10 +25,8 @@
         <td><%= link_to reservation.numer, reservation %></td>
         <td><%= reservation.status %></td>
         <td><%= reservation.zrodlo %></td>
-        <td><%= reservation.data_zakwaterowania %></td>
-        <td><%= reservation.godzina_zakwaterowania.to_s(:time) %></td>
-        <td><%= reservation.data_wykwaterowania %></td>
-        <td><%= reservation.godzina_wykwaterowania.to_s(:time) %></td>
+        <td><%= reservation.data_zakwaterowania %> <%= reservation.godzina_zakwaterowania.to_s(:time) %></td>
+        <td><%= reservation.data_wykwaterowania %> <%= reservation.godzina_wykwaterowania.to_s(:time) %></td>
         <td><%= reservation.apartament.adres %></td>
         <td><%= reservation.klient %></td>
         <td><%= reservation.ilosc_osob %></td>
@@ -67,4 +46,3 @@
     </tbody>
   </table>
 </div>
-<br>

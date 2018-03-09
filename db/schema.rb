@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180212220308) do
+ActiveRecord::Schema.define(version: 20180309130230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "apartaments", force: :cascade do |t|
+    t.string "adres"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "reservations", force: :cascade do |t|
     t.string "numer"
@@ -39,6 +45,23 @@ ActiveRecord::Schema.define(version: 20180212220308) do
     t.text "komentarz_do_wycieczek"
     t.string "oferte_wprowadzil"
     t.date "data_wprowadzenia"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "apartament_id"
+    t.index ["apartament_id"], name: "index_reservations_on_apartament_id"
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.string "keywords"
+    t.integer "apartament"
+    t.string "zrodlo"
+    t.string "status"
+    t.string "oferte_wprowadzil"
+    t.string "pracownik"
+    t.date "data_zakwaterowania_od"
+    t.date "data_zakwaterowania_do"
+    t.date "data_wykwaterowania_od"
+    t.date "data_wykwaterowania_do"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

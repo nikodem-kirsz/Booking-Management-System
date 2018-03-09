@@ -7,6 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 40.times do |n|
+  mieszkania = ['Czapskich 9/105', 'Pilsudskiego 1/12', 'Zwierzyniecka 9/11', 'Rynek Glowny 1', 'Puszkarska 9/5', 'Kremerowska 1/12', 'Lindego 13D/5',
+   'Mazowiecka 41A'
+  ]
+  Apartament.create(adres: mieszkania.sample).save
   Reservation.create(numer: Faker::Number.number(5).to_str,
                      status: 'aktualne',
                      zrodlo: ['booking.com', 'airbnb.com', 'manual'].sample,
@@ -17,7 +21,7 @@
                      godzina_zakwaterowania: Faker::Time.between(DateTime.now + 1, DateTime.now),
                      data_wykwaterowania: Faker::Date.forward(10),
                      godzina_wykwaterowania: Faker::Time.forward(23, :morning),
-                     apartament: ['Czapskich', 'Lindego', 'Mazowiecka', 'Poznanska'].sample,
+                     # apartament: ['Czapskich', 'Lindego', 'Mazowiecka', 'Poznanska'].sample,
                      ilosc_osob: Faker::Number.between(1, 10),
                      pracownik: ['Bartek Kirsz', 'Nikodem Kirsz', 'Anna Kirsz'].sample,
                      klient: Faker::Name.name,
@@ -30,5 +34,6 @@
                      komentarz_do_wycieczek: Faker::Lorem.paragraph(2),
                      oferte_wprowadzil: ['Bartek Kirsz', 'Nikodem Kirsz', 'Anna Kirsz'].sample,
                      data_wprowadzenia: Faker::Date.forward(0),
+                     apartament_id: Apartament.all.sample.id
   ).save
 end
