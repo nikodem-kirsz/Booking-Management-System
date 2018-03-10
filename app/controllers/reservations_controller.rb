@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
-  FILERS = [:search, :keywords, :apartament, :zrodlo, :status, :oferte_wprowadzil, :pracownik, :data_zakwaterowania_od, :data_zakwaterowania_do, :data_wykwaterowania_od, :data_wykwaterowania_do]
+  FILTERS = [:szukaj, :keywords, :apartament, :zrodlo, :status, :oferte_wprowadzil, :pracownik, :data_zakwaterowania_od, :data_zakwaterowania_do, :data_wykwaterowania_od, :data_wykwaterowania_do]
   # GET /reservations
   # GET /reservations.json
   def index
@@ -9,7 +9,7 @@ class ReservationsController < ApplicationController
     @pracownicy = Reservation.distinct.pluck(:pracownik)
     @statusy = Reservation.distinct.pluck(:status)
     search = params[:search].present? ? params[:search] : nil
-    filters = FILERS.each {|filter| params[filter].present? ? true : nil}
+    filters = FILTERS.each {|filter| params[filter].present? ? true : nil}
     @reservations = if search
                       Reservation.search(search)
                     elsif filters
@@ -108,6 +108,6 @@ class ReservationsController < ApplicationController
     end
 
     def search_params
-      params.permit(:search, :keywords, :apartament, :zrodlo, :status, :oferte_wprowadzil, :pracownik, :data_zakwaterowania_od, :data_zakwaterowania_do, :data_wykwaterowania_od, :data_wykwaterowania_do)
+      params.permit(:szukaj, :keywords, :apartament, :zrodlo, :status, :oferte_wprowadzil, :pracownik, :data_zakwaterowania_od, :data_zakwaterowania_do, :data_wykwaterowania_od, :data_wykwaterowania_do)
     end
 end

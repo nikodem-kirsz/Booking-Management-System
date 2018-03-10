@@ -1,5 +1,13 @@
 <%= form_tag '/' do %>
-  <div class="col-lg-12">
+  <div class="col-lg-12" style="padding-left:0px">
+    <div class="form-group col-lg-2">
+      <div style="display:flex;flex-direction:row;">
+        <%= text_field_tag :szukaj, nil, class: 'form-control input valid', placeholder: 'Szukaj rezerwacji' %>
+        <%= submit_tag 'Szukaj', class: 'btn btn-success' %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12" style="padding-left:0px">
     <div class="form-group col-lg-2">
       <label class="control-label">Apartamenty</label>
       <%= select_tag :apartament, options_for_select(@apartamenty.unshift('--Wszystkie--'), params[:apartament]), :class => 'form-control input-sm valid' %>
@@ -20,14 +28,62 @@
       <label class="control-label">Odpowiedzialny pracownik</label>
       <%= select_tag :pracownik, options_for_select(@pracownicy, params[:pracownik]), :class => 'form-control input-sm valid' %>
     </div>
+  </div>
+  <div class="col-lg-12" style="padding-left:0px">
     <div class="form-group col-lg-2">
-      <label class="control-label">Odpowiedzialny pracownik</label>
-      <%= date_field :pracownik, :class => 'form-control input-sm valid' %>
+      <label class="control-label">Data zakwaterowania od</label>
+      <div class="input-group date" id="datetimepickerfrom">
+        <%= text_field_tag :data_zakwaterowania_od, nil, class: 'form-control input-sm valid', placeholder: 'Data zakwaterowania od' %>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
     </div>
     <div class="form-group col-lg-2">
-      <label class="control-label">Odpowiedzialny pracownik</label>
-      <%= select_tag :pracownik, options_for_select(@pracownicy, params[:pracownik]), :class => 'form-control input-sm valid' %>
+      <label class="control-label">Data zakwaterowania do</label>
+      <div class="input-group date" id="datetimepickerfrom">
+        <%= text_field_tag :data_zakwaterowania_do, nil, class: 'form-control input-sm valid', placeholder: 'Data zakwaterowania do' %>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
+    <div class="form-group col-lg-2">
+      <label class="control-label">Data wykwaterowania od</label>
+      <div class="input-group date" id="datetimepickerfrom">
+        <%= date_field_tag :data_wykwaterowania_od, nil, class: 'form-control input-sm valid', placeholder: 'Data wykwaterowania od' %>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
+    <div class="form-group col-lg-2">
+      <label class="control-label">Data wykwaterowania do</label>
+      <div class="input-group date" id="datetimepickerfrom">
+        <%= text_field_tag :data_wykwaterowania_do, nil, class: 'form-control input-sm valid', placeholder: 'Data wykwaterowania do' %>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
+    <div class="form-group col-lg-2">
+      <label class="control-label">Data zakwaterowania</label>
+      <div class="input-group date" id="datetimepickerfrom">
+        <%= text_field_tag :data_zakwaterowania, nil, class: 'form-control input-sm valid', placeholder: 'Data zakwaterowania', "data-provide" => 'datepicker' %>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
+    <div class="form-group col-lg-2">
+      <label class="control-label">Data wykwaterowania</label>
+      <div class="input-group date" id="datetimepickerfrom">
+        <%= text_field_tag :data_wykwaterowania, nil, class: 'form-control input-sm valid', placeholder: 'Data wykwaterowania', "data-provide" => 'datepicker' %>
+        <span class="input-group-addon" data-provide="datepicker">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
     </div>
   </div>
-  <%= submit_tag 'Search' %>
+  <%= submit_tag 'Search', class: 'btn btn-default' %>
 <% end %>

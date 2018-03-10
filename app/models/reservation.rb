@@ -4,7 +4,28 @@ class Reservation < ApplicationRecord
 
   def self.search_reservations(params)
 
-    reservations = Reservation.all
+    reservations = nil
+
+    if(params[:szukaj])
+
+      params[:szukaj].downcase!
+
+      if (results= where(["LOWER(klient) LIKE ?", "%#{params[:szukaj]}%"])).count > 0
+        reservations = results
+      elsif (results = joins(:apartament).where(["LOWER(adres) LIKE ?", "%#{params[:szukaj]}%"])).count > 0
+        reservations = results
+      elsif (results = where(["LOWER(zrodlo) LIKE ?", "%#{params[:szukaj]}%"])).count > 0
+        reservations = results
+      elsif (results = where(["LOWER(pracownik) LIKE ?", "%#{params[:szukaj]}%"])).count > 0
+        reservations = results
+      elsif (results = where(["LOWER(oferte_wprowadzil) LIKE ?", "%#{params[:szukaj]}%"])).count > 0
+        reservations = results
+      elsif (results = where(["LOWER(status) LIKE ?", "%#{params[:szukaj]}%"])).count > 0
+        reservations = results
+      end
+    end
+
+    reservations ||= Reservation.all
 
     reservations = reservations.joins(:apartament).where(["adres LIKE ?", "%#{params[:apartament]}%"]) if params[:apartament].present? && params[:apartament] != '--Wszystkie--'
     reservations = reservations.where(["zrodlo LIKE ?", "%#{params[:zrodlo]}%"]) if params[:zrodlo].present? && params[:zrodlo] != '--Wszystkie--'
