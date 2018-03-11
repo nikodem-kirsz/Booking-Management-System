@@ -1,89 +1,150 @@
-<%= form_tag '/' do %>
+<%= form_tag '/', remote: true do %>
   <div class="col-lg-12" style="padding-left:0px">
     <div class="form-group col-lg-2">
       <div style="display:flex;flex-direction:row;">
         <%= text_field_tag :szukaj, nil, class: 'form-control input valid', placeholder: 'Szukaj rezerwacji' %>
-        <%= submit_tag 'Szukaj', class: 'btn btn-success' %>
+        <%= submit_tag 'Szukaj', class: 'btn btn-success ajaxSubmit' %>
+      </div>
+    </div>
+    <div class="col-lg-2">
+      <button class="btn btn-default" id="show_filters">Wiecej filtrow</button>
+      <button class="btn btn-default" id="remove_filters">Usun filtry</button>
+    </div>
+  </div>
+  <div id="filtry">
+    <div class="col-lg-12" style="padding-left:0px">
+
+      <div class="form-group col-lg-2">
+        <label class="control-label">Apartamenty</label>
+        <%= select_tag :apartament, options_for_select(@apartamenty.unshift('--Wszystkie--'), params[:apartament]), :class => 'form-control input-sm valid selectfield' %>
+      </div>
+      <div class="form-group col-lg-2">
+        <label class="control-label">Zrodla rezerwacji</label>
+        <%= select_tag :zrodlo, options_for_select(@zrodla.unshift('--Wszystkie--'), params[:zrodlo]), :class => 'form-control input-sm valid selectfield' %>
+      </div>
+      <div class="form-group col-lg-2">
+        <label class="control-label">Statusy</label>
+        <%= select_tag :status, options_for_select(@statusy.unshift('--Wszystkie--'), params[:status]), :class => 'form-control input-sm valid selectfield' %>
+      </div>
+      <div class="form-group col-lg-2">
+        <label class="control-label">Wprowadzone przez</label>
+        <%= select_tag :oferte_wprowadzil, options_for_select(@pracownicy.unshift('--Wszystkie--'), params[:oferte_wprowadzil]), :class => 'form-control input-sm valid selectfield' %>
+      </div>
+      <div class="form-group col-lg-2">
+        <label class="control-label">Odpowiedzialny pracownik</label>
+        <%= select_tag :pracownik, options_for_select(@pracownicy, params[:pracownik]), :class => 'form-control input-sm valid selectfield' %>
+      </div>
+    </div>
+    <div class="col-lg-12" style="padding-left:0px">
+      <div class="form-group col-lg-2">
+        <label class="control-label">Data zakwaterowania od</label>
+        <div class="input-group date datetimepickerfrom">
+          <%= text_field_tag :data_zakwaterowania_od, nil, class: 'form-control input-sm valid datefield', placeholder: 'Data zakwaterowania od' %>
+          <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+        </div>
+      </div>
+      <div class="form-group col-lg-2">
+        <label class="control-label">Data zakwaterowania do</label>
+        <div class="input-group date datetimepickerfrom">
+          <%= text_field_tag :data_zakwaterowania_do, nil, class: 'form-control input-sm valid datefield', placeholder: 'Data zakwaterowania do' %>
+          <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+        </div>
+      </div>
+      <div class="form-group col-lg-2">
+        <label class="control-label">Data wykwaterowania od</label>
+        <div class="input-group date datetimepickerfrom">
+          <%= text_field_tag :data_wykwaterowania_od, nil, class: 'form-control input-sm valid datefield', placeholder: 'Data wykwaterowania od' %>
+          <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+        </div>
+      </div>
+      <div class="form-group col-lg-2">
+        <label class="control-label">Data wykwaterowania do</label>
+        <div class="input-group date datetimepickerfrom">
+          <%= text_field_tag :data_wykwaterowania_do, nil, class: 'form-control input-sm valid datefield', placeholder: 'Data wykwaterowania do' %>
+          <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+        </div>
+      </div>
+      <div class="form-group col-lg-2">
+        <label class="control-label">Data zakwaterowania</label>
+        <div class="input-group date datepickerfrom">
+          <%= text_field_tag :data_zakwaterowania, nil, class: 'form-control input-sm valid datefield', placeholder: 'Data zakwaterowania' %>
+          <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+        </div>
+      </div>
+      <div class="form-group col-lg-2">
+        <label class="control-label">Data wykwaterowania</label>
+        <div class="form-group">
+          <div class="input-group date datepickerfrom">
+            <%= text_field_tag :data_wykwaterowania, nil, class: 'form-control input-sm valid datefield', placeholder: 'Data wykwaterowania'%>
+            <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-lg-12" style="left:43%">
+        <%= submit_tag 'Szukaj rezerwacji', class: 'btn btn-success ajaxSubmit' %>
       </div>
     </div>
   </div>
-  <div class="col-lg-12" style="padding-left:0px">
-    <div class="form-group col-lg-2">
-      <label class="control-label">Apartamenty</label>
-      <%= select_tag :apartament, options_for_select(@apartamenty.unshift('--Wszystkie--'), params[:apartament]), :class => 'form-control input-sm valid' %>
-    </div>
-    <div class="form-group col-lg-2">
-      <label class="control-label">Zrodla rezerwacji</label>
-      <%= select_tag :zrodlo, options_for_select(@zrodla.unshift('--Wszystkie--'), params[:zrodlo]), :class => 'form-control input-sm valid' %>
-    </div>
-    <div class="form-group col-lg-2">
-      <label class="control-label">Statusy</label>
-      <%= select_tag :status, options_for_select(@statusy.unshift('--Wszystkie--'), params[:status]), :class => 'form-control input-sm valid' %>
-    </div>
-    <div class="form-group col-lg-2">
-      <label class="control-label">Wprowadzone przez</label>
-      <%= select_tag :oferte_wprowadzil, options_for_select(@pracownicy.unshift('--Wszystkie--'), params[:oferte_wprowadzil]), :class => 'form-control input-sm valid' %>
-    </div>
-    <div class="form-group col-lg-2">
-      <label class="control-label">Odpowiedzialny pracownik</label>
-      <%= select_tag :pracownik, options_for_select(@pracownicy, params[:pracownik]), :class => 'form-control input-sm valid' %>
-    </div>
+  <div class="col-lg-12" style="left:45%">
+    <%= image_tag "spinner.gif", id: "spinner", style: 'display:none' %>
   </div>
-  <div class="col-lg-12" style="padding-left:0px">
-    <div class="form-group col-lg-2">
-      <label class="control-label">Data zakwaterowania od</label>
-      <div class="input-group date" id="datetimepickerfrom">
-        <%= text_field_tag :data_zakwaterowania_od, nil, class: 'form-control input-sm valid', placeholder: 'Data zakwaterowania od' %>
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
-    </div>
-    <div class="form-group col-lg-2">
-      <label class="control-label">Data zakwaterowania do</label>
-      <div class="input-group date" id="datetimepickerfrom">
-        <%= text_field_tag :data_zakwaterowania_do, nil, class: 'form-control input-sm valid', placeholder: 'Data zakwaterowania do' %>
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
-    </div>
-    <div class="form-group col-lg-2">
-      <label class="control-label">Data wykwaterowania od</label>
-      <div class="input-group date" id="datetimepickerfrom">
-        <%= date_field_tag :data_wykwaterowania_od, nil, class: 'form-control input-sm valid', placeholder: 'Data wykwaterowania od' %>
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
-    </div>
-    <div class="form-group col-lg-2">
-      <label class="control-label">Data wykwaterowania do</label>
-      <div class="input-group date" id="datetimepickerfrom">
-        <%= text_field_tag :data_wykwaterowania_do, nil, class: 'form-control input-sm valid', placeholder: 'Data wykwaterowania do' %>
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
-    </div>
-    <div class="form-group col-lg-2">
-      <label class="control-label">Data zakwaterowania</label>
-      <div class="input-group date" id="datetimepickerfrom">
-        <%= text_field_tag :data_zakwaterowania, nil, class: 'form-control input-sm valid', placeholder: 'Data zakwaterowania', "data-provide" => 'datepicker' %>
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
-    </div>
-    <div class="form-group col-lg-2">
-      <label class="control-label">Data wykwaterowania</label>
-      <div class="input-group date" id="datetimepickerfrom">
-        <%= text_field_tag :data_wykwaterowania, nil, class: 'form-control input-sm valid', placeholder: 'Data wykwaterowania', "data-provide" => 'datepicker' %>
-        <span class="input-group-addon" data-provide="datepicker">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
-    </div>
-  </div>
-  <%= submit_tag 'Search', class: 'btn btn-default' %>
+
 <% end %>
+
+<script type="text/javascript">
+
+    $(function () {
+        $('.datetimepickerfrom').datetimepicker({
+            locale: 'pl'
+        });
+    });
+    $(function () {
+        $('.datepickerfrom').datetimepicker({
+            format: 'L',
+            locale: 'pl'
+        });
+    });
+
+    $('.ajaxSubmit').on('click', function() {
+       $('#spinner').show();
+    });
+
+    $('#filtry').hide();
+    $('#remove_filters').hide();
+
+    $('#show_filters').on('click', function(e) {
+        e.preventDefault();
+        if($('#filtry').css('display') == 'none') {
+            $('#filtry').show();
+            $('#remove_filters').show();
+        }
+        else {
+            $('#filtry').hide();
+            $('#remove_filters').hide();
+        }
+
+    });
+
+    $('#remove_filters').on('click', function(e) {
+       e.preventDefault();
+       $('.datefield').each(function(index, date) {
+           date.value = "";
+       });
+        $('.selectfield').each(function(index, field) {
+            field.value = "--Wszystkie--";
+        });
+    });
+
+</script>

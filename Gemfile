@@ -41,7 +41,10 @@ gem 'prawn', '~> 2.1'
 gem 'prawn-table', '~> 0.2.2'
 gem 'responders', '~> 2.3'
 gem 'searchkick'
-gem 'bootstrap-datepicker-rails', '~> 1.6', '>= 1.6.1.1'
+gem 'momentjs-rails', '~> 2.17', '>= 2.17.1'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
+gem 'bootstrap-datepicker-rails'
+gem 'will_paginate', '~> 3.1', '>= 3.1.6'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

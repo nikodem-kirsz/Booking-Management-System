@@ -1,61 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <div style="margin: auto; width: 90%">
-  <h3>Reserwacje</h3>
+  <h4>Rezerwacje</h4>
   <%= render 'layouts/filters' %>
   <br>
   <%= link_to 'Nowa rezerwacja', new_reservation_path, :class => "btn btn-default" %>
   <br>
-  <table class="table table-striped table-hover table-bordered">
-
-    <thead class="thead-inverse">
-    <tr>
-      <th>Numer</th>
-      <th>Status</th>
-      <th>Zrodlo</th>
-      <th><span class="glyphicon glyphicon-calendar"></span></th>
-      <th><span class="glyphicon glyphicon-log-in"></span></th>
-      <th><span class="glyphicon glyphicon-calendar"></span></th>
-      <th><span class="glyphicon glyphicon-log-out"></span></th>
-      <th>Apartament</th>
-      <th>Klient</th>
-      <th><span class="glyphicon glyphicon-user"></span></th>
-      <th><span class="glyphicon glyphicon-calendar"></span></th>
-      <th><span class="glyphicon glyphicon-usd"></span></th>
-      <th><span class="glyphicon glyphicon-plane"></span></th>
-      <th><span class="glyphicon glyphicon-road"></span></th>
-      <th><span class="glyphicon glyphicon-thumbs-up"></span></th>
-      <th colspan="5">Akcje</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% @reservations.each do |reservation| %>
-      <tr>
-        <td><%= link_to reservation.numer, reservation %></td>
-        <td><%= reservation.status %></td>
-        <td><%= reservation.zrodlo %></td>
-        <td><%= reservation.data_zakwaterowania %></td>
-        <td><%= reservation.godzina_zakwaterowania.to_s(:time) %></td>
-        <td><%= reservation.data_wykwaterowania %></td>
-        <td><%= reservation.godzina_wykwaterowania.to_s(:time) %></td>
-        <td><%= reservation.apartament.adres %></td>
-        <td><%= reservation.klient %></td>
-        <td><%= reservation.ilosc_osob %></td>
-        <td><%= (reservation.data_wykwaterowania - reservation.data_zakwaterowania).to_i %></td>
-        <td><%= reservation.kwota %></td>
-        <td><%= reservation.kwota %></td>
-        <td><%= reservation.kwota %></td>
-        <td><%= reservation.kwota %></td>
-
-        <td><%= link_to '', reservation_path(reservation, :format => 'pdf') , :class => 'glyphicon glyphicon-download-alt' %></td>
-        <td><%= link_to '', faktura_reservation_path(reservation, :format => 'pdf'), :class => 'glyphicon glyphicon-envelope' %></td>
-        <td><%= link_to '', reservation, :class => 'glyphicon glyphicon-edit' %></td>
-        <td><%= link_to '', edit_reservation_path(reservation), :class => 'glyphicon glyphicon-edit' %></td>
-        <td><%= link_to '', reservation, method: :delete, data: { confirm: 'Na pewno chcesz wykasować tą rezerwacje?' }, :class => 'glyphicon glyphicon-trash' %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+  <%= render partial: 'list' %>
 </div>
 <br>

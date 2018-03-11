@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180309130230) do
+ActiveRecord::Schema.define(version: 20180307232150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 20180309130230) do
     t.integer "kwota"
     t.text "komentarz"
     t.text "sprzatanie"
-    t.date "data_zakwaterowania"
+    t.datetime "data_zakwaterowania"
     t.time "godzina_zakwaterowania"
-    t.date "data_wykwaterowania"
+    t.datetime "data_wykwaterowania"
     t.time "godzina_wykwaterowania"
     t.string "apartament"
     t.integer "ilosc_osob"
@@ -49,21 +49,6 @@ ActiveRecord::Schema.define(version: 20180309130230) do
     t.datetime "updated_at", null: false
     t.integer "apartament_id"
     t.index ["apartament_id"], name: "index_reservations_on_apartament_id"
-  end
-
-  create_table "searches", force: :cascade do |t|
-    t.string "keywords"
-    t.integer "apartament"
-    t.string "zrodlo"
-    t.string "status"
-    t.string "oferte_wprowadzil"
-    t.string "pracownik"
-    t.date "data_zakwaterowania_od"
-    t.date "data_zakwaterowania_do"
-    t.date "data_wykwaterowania_od"
-    t.date "data_wykwaterowania_do"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

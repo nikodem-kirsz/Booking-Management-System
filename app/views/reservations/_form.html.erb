@@ -23,12 +23,22 @@
 
     </div>
     <div class="form-group col-lg-4">
-      <div class="panel panel-primary">
+      <div class="panel panel-default">
         <div class="panel-heading">
           Zakwaterowanie klienta
         </div>
         <div class="panel-body">
-          <%= f.input :data_zakwaterowania, label: 'Data zakwaterowania', input_html: { class: 'form-control input-sm' } %>
+          <div class="form-group col-lg-12">
+            <div class="col-lg-7">
+              <div class="input-group date datepickerfrom">
+                <%= f.input :data_zakwaterowania, input_html: { class: 'form-control input-sm' } %>
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+
           <%= f.input :godzina_zakwaterowania , label: 'Godzina zakwaterowania', input_html: { class: 'form-control input-sm' } %>
           <%= f.input :data_wykwaterowania, label: 'Data wykwaterowania', input_html: { class: 'form-control input-sm' } %>
           <%= f.input :godzina_wykwaterowania, label: 'Godzina wykwaterowania', input_html: { class: 'form-control input-sm' } %>
@@ -62,3 +72,17 @@
 
   </div>
 <% end %>
+
+<script type="text/javascript">
+    $(function () {
+        $('.datetimepickerfrom').datetimepicker({
+            locale: 'pl'
+        });
+    });
+    $(function () {
+        $('.datepickerfrom').datetimepicker({
+            format: 'L',
+            locale: 'pl'
+        });
+    });
+</script>
