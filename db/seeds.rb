@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-40.times do |n|
+400.times do |n|
   mieszkania = ['Czapskich 9/105', 'Pilsudskiego 1/12', 'Zwierzyniecka 9/11', 'Rynek Glowny 1', 'Puszkarska 9/5', 'Kremerowska 1/12', 'Lindego 13D/5',
    'Mazowiecka 41A'
   ]

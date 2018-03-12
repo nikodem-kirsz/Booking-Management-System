@@ -1,14 +1,13 @@
 <div id="reservations_list">
   <table class="table table-striped table-hover table-bordered">
-
       <thead class="thead-inverse">
       <tr>
         <th>Numer</th>
         <th>Status</th>
         <th>Zrodlo</th>
-        <th><span class="glyphicon glyphicon-calendar"></span></th>
+        <th class="ajaxSubmit"><%= sortable "data_zakwaterowania"%></th>
         <th><span class="glyphicon glyphicon-log-in"></span></th>
-        <th><span class="glyphicon glyphicon-calendar"></span></th>
+        <th class="ajaxSubmit"><%= sortable "data_wykwaterowania"%></th>
         <th><span class="glyphicon glyphicon-log-out"></span></th>
         <th>Apartament</th>
         <th>Klient</th>
@@ -32,7 +31,7 @@
           <td><%= reservation.data_zakwaterowania.strftime("%H:%M") %></td>
           <td><%= reservation.data_wykwaterowania.to_date %></td>
           <td><%= reservation.data_wykwaterowania.strftime("%H:%M") %></td>
-          <td><%= reservation.apartament.adres %></td>
+          <td><%= reservation.adres %></td>
           <td><%= reservation.klient %></td>
           <td><%= reservation.ilosc_osob %></td>
           <td><%= (reservation.data_wykwaterowania.to_date - reservation.data_zakwaterowania.to_date).to_i %></td>
@@ -71,6 +70,10 @@
 
     $(".flickr_pagination a").click(function() {
         window.scrollTo(0, 0);
+        $('#spinner').show();
+    });
+
+    $('.ajaxSubmit').on('click', function() {
         $('#spinner').show();
     });
 </script>

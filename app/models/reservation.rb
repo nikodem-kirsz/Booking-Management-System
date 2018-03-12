@@ -1,5 +1,4 @@
 class Reservation < ApplicationRecord
-  searchkick
   belongs_to :apartament
 
   def self.search_reservations(params)
@@ -54,7 +53,11 @@ class Reservation < ApplicationRecord
       reservations = reservations.where(["CAST(data_wykwaterowania as DATE) = ?", "#{Date.parse(params[:data_wykwaterowania])}"]) if params[:data_wykwaterowania].present?
     end
 
-    return reservations
+    if  !params[:apartament].present? || params[:apartament] == "--Wszystkie--"
+      return reservations.select("*").joins("INNER JOIN apartaments ON apartaments.id = reservations.apartament_id")
+    else
+      return reservations
+    end
   end
 
 end

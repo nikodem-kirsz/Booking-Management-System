@@ -1,11 +1,16 @@
-
-<header class="navbar navbar-inverse">
+<header class="navbar navbar-inverse navbar-fixed-top">
   <div style="margin: auto; width: 90%">
     <div class="navbar-header">
         <%= link_to "Apartamenty Lunałke", root_path, :class => 'navbar-brand' %>
     </div>
     <% if user_signed_in? %>
       <ul class="nav navbar-nav navbar-left navbar-menu">
+        <li>
+          <%= form_tag '/', class: "navbar-form navbar-left", remote: true do %>
+            <%= text_field_tag :szukaj, params[:szukaj], class: "form-control", placeholder: "Szukaj rezerwacji..."  %>
+            <%= submit_tag "Go!", name: nil, class: "btn btn-default ajaxSubmit" %>
+          <% end %>
+        </li>
         <li>
           <%= link_to "Dodaj apartament", new_apartament_path %>
         </li>
@@ -36,6 +41,12 @@
     <% else %>
       <ul class="nav navbar-nav navbar-left navbar-menu">
         <li>
+          <%= form_tag '/', class: "navbar-form navbar-left", remote: true do %>
+            <%= text_field_tag :szukaj, params[:szukaj], class: "form-control", placeholder: "Szukaj rezerwacji..."  %>
+            <%= submit_tag "Go!", name: nil, class: "btn btn-default ajaxSubmit" %>
+          <% end %>
+        </li>
+        <li>
           <%= link_to "Dodaj apartament", new_apartament_path %>
         </li>
         <li>
@@ -52,12 +63,6 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <%= form_tag reservations_path, method: :get, class: "navbar-form navbar-left", role: "search" do %>
-            <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Szukaj rezerwacji..."  %>
-            <%= submit_tag "Go!", name: nil, class: "btn btn-default" %>
-          <% end %>
-        </li>
-        <li>
           <%= link_to "Logowanie", new_user_session_path %>
         </li>
         <li>
@@ -67,3 +72,12 @@
     <% end %>
 </div>
 </header>
+<br>
+<br>
+<br>
+
+<script type="text/javascript">
+    $('.ajaxSubmit').on('click', function() {
+        $('#spinner').show();
+    });
+</script>

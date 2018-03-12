@@ -3,41 +3,37 @@ class ReservationsController < ApplicationController
   FILTERS = [:szukaj, :keywords, :apartament, :zrodlo, :status, :oferte_wprowadzil, :pracownik, :data_zakwaterowania_od, :data_zakwaterowania_do, :data_wykwaterowania_od, :data_wykwaterowania_do, :data_zakwaterowania, :data_wykwaterowania]
   # GET /reservations
   # GET /reservations.json
+
   def index
     @zrodla = Reservation.distinct.pluck(:zrodlo)
-    @apartamenty = Reservation.joins(:apartament).distinct.pluck(:adres)
+    @apartamenty = Apartament.all.pluck(:adres)
     @pracownicy = Reservation.distinct.pluck(:pracownik)
     @statusy = Reservation.distinct.pluck(:status)
-    search = params[:search].present? ? params[:search] : nil
-    filters = false
-    FILTERS.each do |filter|
-      if params[filter].present?
-        filters = true
-        break
+
+    if(params[:sort] && params[:direction])
+      @reservations = Reservation.select("*").joins("INNER JOIN apartaments ON apartaments.id = reservations.apartament_id")
+                          .order(params[:sort] + " " + params[:direction])
+                          .paginate(page: params[:page], per_page: 100)
+    else
+      filters = false
+      FILTERS.each do |filter|
+        if params[filter].present?
+          filters = true
+          break
+        end
       end
+      @reservations = if filters
+                        Reservation.search_reservations(search_params)
+                            .paginate(page: params[:page], per_page: 100)
+                      else
+                        Reservation.select("*").joins("INNER JOIN apartaments ON apartaments.id = reservations.apartament_id")
+                            .paginate(page: params[:page], per_page: 100)
+                      end
     end
-    @reservations = if search
-                      Reservation.search(search)
-                          .all.paginate(page: params[:page], per_page: 30)
-                    elsif filters
-                           Reservation.search_reservations(search_params)
-                               .all.paginate(page: params[:page], per_page: 30)
-                    else
-                      Reservation.all.paginate(page: params[:page], per_page: 30)
-                    end
-    # if(params[:search])
-    #   @reservations = Reservation.search_reservations(params[:search])
-    # else
-    #   @reservations = Reservation.all
-    # end
     respond_to do |format|
       format.js
       format.html
-  end
-  end
-
-  def index_ajax
-
+    end
   end
 
   # GET /reservations/1
@@ -124,6 +120,6 @@ class ReservationsController < ApplicationController
     end
 
     def search_params
-      params.permit(:szukaj, :keywords, :apartament, :zrodlo, :status, :oferte_wprowadzil, :pracownik, :data_zakwaterowania_od, :data_zakwaterowania_do, :data_wykwaterowania_od, :data_wykwaterowania_do, :data_zakwaterowania, :data_wykwaterowania)
+      params.permit(:utf8, :commit, :szukaj, :keywords, :apartament, :zrodlo, :status, :oferte_wprowadzil, :pracownik, :data_zakwaterowania_od, :data_zakwaterowania_do, :data_wykwaterowania_od, :data_wykwaterowania_do, :data_zakwaterowania, :data_wykwaterowania)
     end
 end
