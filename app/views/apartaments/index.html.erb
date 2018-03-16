@@ -1,27 +1,53 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Apartaments</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Adres</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @apartaments.each do |apartament| %>
+<div style="margin: auto; width: 90%">
+  <p id="notice"><%= notice %></p>
+  <h4>Apartaments</h4>
+  <%= link_to 'New Apartament', new_apartament_path %>
+  <div id="reservations_list">
+    <table class="table table-striped table-hover table-bordered">
+      <thead class="thead-inverse">
       <tr>
-        <td><%= apartament.adres %></td>
-        <td><%= link_to 'Show', apartament %></td>
-        <td><%= link_to 'Edit', edit_apartament_path(apartament) %></td>
-        <td><%= link_to 'Destroy', apartament, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Id</th>
+        <th>Adres</th>
+        <th>Zrezlizowane <br>rezerwacje</th>
+        <th>Aktywne <br>rezerwacje</th>
+        <th>Wszystkie <br>rezerwacje</th>
+        <th>Suma pobranych oplat(w ciagu miesiaca)</th>
+        <th>Suma pobranych oplat od poczatku</th>
+        <th>Koszt najmu(miesiecznie)</th>
+        <th>Koszt najmu <br>na czas trwania umowy</th>
+        <th>Czas trwania umowy <br>(w miesiacach)</th>
+        <th colspan="3">Akcje</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<br>
+      <tbody>
+      <% @apartaments.each do |apartament| %>
+        <tr>
+          <td><%= apartament.id %></td>
+          <td><%= apartament.adres %></td>
+          <th><%= apartament.zrezlizowane_rezerwacje %></th>
+          <th><%= apartament.aktywne_rezerwacje %></th>
+          <th><%= apartament.reservations.count %></th>
+          <th></th>
+          <th><%= number_to_currency(apartament.total_money, unit: '', precision: 0) %> zl</th>
+          <th><%= number_to_currency(apartament.koszt_najmu, unit: '', precision: 0) %> zl</th>
+          <th><%= number_to_currency(apartament.koszt_trwania_umowy, unit: '', precision: 0) %> zl</th>
+          <th><%= apartament.czas_trwania_umowy %></th>
+          <td><%= link_to 'Show', apartament %></td>
+          <td><%= link_to 'Edit', edit_apartament_path(apartament) %></td>
+          <td><%= link_to 'Destroy', apartament, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<%= link_to 'New Apartament', new_apartament_path %>
+
+
+
+
+
+
+
+

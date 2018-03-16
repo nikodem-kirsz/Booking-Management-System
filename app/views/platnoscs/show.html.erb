@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Zaliczka:</strong>
+  <%= @platnosc.zaliczka %>
+</p>
+
+<p>
+  <strong>Kwota:</strong>
+  <%= @platnosc.kwota %>
+</p>
+
+<p>
+  <strong>Termin platnosci:</strong>
+  <%= @platnosc.termin_platnosci %>
+</p>
+
+<p>
+  <strong>Konto:</strong>
+  <%= @platnosc.konto %>
+</p>
+
+<p>
+  <strong>Data zaplaty:</strong>
+  <%= @platnosc.data_zaplaty %>
+</p>
+
+<p>
+  <strong>Podatek:</strong>
+  <%= @platnosc.podatek %>
+</p>
+
+<p>
+  <strong>Rodzaj faktury:</strong>
+  <%= @platnosc.rodzaj_faktury %>
+</p>
+
+<p>
+  <strong>Data wystawienia:</strong>
+  <%= @platnosc.data_wystawienia %>
+</p>
+
+<%= link_to 'Edit', edit_platnosc_path(@platnosc) %> |
+<%= link_to 'Back', platnoscs_path %>

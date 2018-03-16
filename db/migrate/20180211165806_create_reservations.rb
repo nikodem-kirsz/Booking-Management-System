@@ -8,10 +8,7 @@ class CreateReservations < ActiveRecord::Migration[5.1]
       t.text :komentarz
       t.text :sprzatanie
       t.datetime :data_zakwaterowania
-      t.time :godzina_zakwaterowania
       t.datetime :data_wykwaterowania
-      t.time :godzina_wykwaterowania
-      t.string :apartament
       t.integer :ilosc_osob
       t.string :pracownik
       t.string :klient
@@ -25,6 +22,7 @@ class CreateReservations < ActiveRecord::Migration[5.1]
       t.string :oferte_wprowadzil
       t.date :data_wprowadzenia
       t.timestamps
+
     end
   end
 end

@@ -26,13 +26,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <%= form_tag reservations_path, method: :get, class: "navbar-form navbar-left", role: "search" do %>
-            <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Szukaj rezerwacji..."  %>
-            <%= submit_tag "Go!", name: nil, class: "btn btn-default" %>
-          <% end %>
-        </li>
-        <li>
-           <%= link_to("Zalogowany jako #{User.find(session["warden.user.user.key"][0][0]).email}", edit_user_registration_path) %>
+           <%= link_to("Zalogowany jako #{User.find(session["warden.user.user.key"][0][0]).imie}", edit_user_registration_path) %>
         </li>
         <li>
           <%= link_to "Wyloguj", destroy_user_session_path, method: :delete %>
@@ -75,7 +69,8 @@
 <br>
 <br>
 <br>
-
+<br>
+<br>
 <script type="text/javascript">
     $('.ajaxSubmit').on('click', function() {
         $('#spinner').show();

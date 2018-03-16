@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Platnoscs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Zaliczka</th>
+      <th>Kwota</th>
+      <th>Termin platnosci</th>
+      <th>Konto</th>
+      <th>Data zaplaty</th>
+      <th>Podatek</th>
+      <th>Rodzaj faktury</th>
+      <th>Data wystawienia</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @platnoscs.each do |platnosc| %>
+      <tr>
+        <td><%= platnosc.zaliczka %></td>
+        <td><%= platnosc.kwota %></td>
+        <td><%= platnosc.termin_platnosci %></td>
+        <td><%= platnosc.konto %></td>
+        <td><%= platnosc.data_zaplaty %></td>
+        <td><%= platnosc.podatek %></td>
+        <td><%= platnosc.rodzaj_faktury %></td>
+        <td><%= platnosc.data_wystawienia %></td>
+        <td><%= link_to 'Show', platnosc %></td>
+        <td><%= link_to 'Edit', edit_platnosc_path(platnosc) %></td>
+        <td><%= link_to 'Destroy', platnosc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Platnosc', new_platnosc_path %>

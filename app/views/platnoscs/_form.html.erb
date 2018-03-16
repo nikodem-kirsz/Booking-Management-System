@@ -1,0 +1,18 @@
+<%= simple_form_for(@platnosc) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :zaliczka %>
+    <%= f.input :kwota %>
+    <%= f.input :termin_platnosci %>
+    <%= f.input :konto %>
+    <%= f.input :data_zaplaty %>
+    <%= f.input :podatek %>
+    <%= f.input :rodzaj_faktury %>
+    <%= f.input :data_wystawienia %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :platnoscs
+  resources :klients
   resources :apartaments
   root :to => 'reservations#index'
   post '/', to: "reservations#index"
@@ -8,6 +10,7 @@ Rails.application.routes.draw do
     end
   end
   resources :searches
-  devise_for :users
+  devise_for :users, :controllers => { registrations: 'registrations' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get 'loadKlients', to: "reservations#loadKlients"
 end

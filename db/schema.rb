@@ -10,16 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180311205107) do
+ActiveRecord::Schema.define(version: 20180315171428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "apartaments", force: :cascade do |t|
     t.string "adres"
+    t.integer "koszt_najmu"
+    t.integer "czas_trwania_umowy"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["adres"], name: "index_apartaments_on_adres"
+  end
+
+  create_table "klients", force: :cascade do |t|
+    t.string "imie"
+    t.string "nazwisko"
+    t.string "numer_telefonu"
+    t.string "email"
+    t.string "nazwa_firmy"
+    t.string "kod_pocztowy"
+    t.string "ulica"
+    t.string "miasto"
+    t.string "numer_nip"
+    t.string "kod_kraju"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "platnoscs", force: :cascade do |t|
+    t.string "zaliczka"
+    t.integer "kwota"
+    t.string "termin_platnosci"
+    t.string "konto"
+    t.string "data_zaplaty"
+    t.string "podatek"
+    t.string "rodzaj_faktury"
+    t.string "data_wystawienia"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "reservation_id"
+    t.index ["reservation_id"], name: "index_platnoscs_on_reservation_id"
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -30,10 +62,7 @@ ActiveRecord::Schema.define(version: 20180311205107) do
     t.text "komentarz"
     t.text "sprzatanie"
     t.datetime "data_zakwaterowania"
-    t.time "godzina_zakwaterowania"
     t.datetime "data_wykwaterowania"
-    t.time "godzina_wykwaterowania"
-    t.string "apartament"
     t.integer "ilosc_osob"
     t.string "pracownik"
     t.string "klient"
@@ -49,7 +78,11 @@ ActiveRecord::Schema.define(version: 20180311205107) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "apartament_id"
-    t.index ["apartament"], name: "index_reservations_on_apartament"
+    t.boolean "transport_z_lotniska", default: false
+    t.boolean "transport_na_lotnisko", default: false
+    t.boolean "parking", default: false
+    t.boolean "wycieczka", default: false
+    t.boolean "lozeczko_dla_dziecka", default: false
     t.index ["apartament_id"], name: "index_reservations_on_apartament_id"
     t.index ["klient"], name: "index_reservations_on_klient"
     t.index ["numer"], name: "index_reservations_on_numer"

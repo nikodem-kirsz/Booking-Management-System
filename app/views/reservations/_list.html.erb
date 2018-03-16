@@ -2,13 +2,12 @@
   <table class="table table-striped table-hover table-bordered">
       <thead class="thead-inverse">
       <tr>
+        <th>Id</th>
         <th>Numer</th>
         <th>Status</th>
         <th>Zrodlo</th>
         <th class="ajaxSubmit"><%= sortable "data_zakwaterowania"%></th>
-        <th><span class="glyphicon glyphicon-log-in"></span></th>
         <th class="ajaxSubmit"><%= sortable "data_wykwaterowania"%></th>
-        <th><span class="glyphicon glyphicon-log-out"></span></th>
         <th>Apartament</th>
         <th>Klient</th>
         <th><span class="glyphicon glyphicon-user"></span></th>
@@ -24,21 +23,20 @@
       <tbody>
       <% @reservations.each do |reservation| %>
         <tr>
+          <td><%= reservation.id %></td>
           <td><%= link_to reservation.numer, reservation %></td>
           <td><%= reservation.status %></td>
           <td><%= reservation.zrodlo %></td>
-          <td><%= reservation.data_zakwaterowania.to_date %></td>
-          <td><%= reservation.data_zakwaterowania.strftime("%H:%M") %></td>
-          <td><%= reservation.data_wykwaterowania.to_date %></td>
-          <td><%= reservation.data_wykwaterowania.strftime("%H:%M") %></td>
-          <td><%= reservation.adres %></td>
+          <td><%= reservation.data_zakwaterowania.to_date %>   <%= reservation.data_zakwaterowania.strftime("%H:%M") %></td>
+          <td><%= reservation.data_wykwaterowania.to_date %>   <%= reservation.data_wykwaterowania.strftime("%H:%M") %></td>
+          <td><%= reservation.apartament.adres %></td>
           <td><%= reservation.klient %></td>
           <td><%= reservation.ilosc_osob %></td>
           <td><%= (reservation.data_wykwaterowania.to_date - reservation.data_zakwaterowania.to_date).to_i %></td>
           <td><%= reservation.kwota %></td>
-          <td><%= reservation.kwota %></td>
-          <td><%= reservation.kwota %></td>
-          <td><%= reservation.kwota %></td>
+          <td><%= check_box_tag :transport_z_lotniska , nil, reservation.transport_z_lotniska?, disabled: true %></td>
+          <td><%= check_box_tag :parking , nil, reservation.parking?, disabled: true %></td>
+          <td><%= check_box_tag :w_trakcie_realizacji , nil, reservation.data_wykwaterowania <= Time.now ? "yes" : "no", disabled: true %></td>
 
           <td><%= link_to '', reservation_path(reservation, :format => 'pdf') , :class => 'glyphicon glyphicon-download-alt' %></td>
           <td><%= link_to '', faktura_reservation_path(reservation, :format => 'pdf'), :class => 'glyphicon glyphicon-envelope' %></td>

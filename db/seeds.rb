@@ -6,24 +6,24 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+mieszkania = ['Czapskich 9/105', 'Pilsudskiego 1/12', 'Zwierzyniecka 9/11', 'Rynek Glowny 1', 'Puszkarska 9/5', 'Kremerowska 1/12', 'Lindego 13D/5',
+              'Mazowiecka 41A'
+]
+
+mieszkania.each do |mieszkanie|
+  Apartament.create(adres: mieszkanie, koszt_najmu: [1200, 1600, 2000, 2500, 3400, 4800].sample, czas_trwania_umowy: [12, 24, 36, 48, 60].sample).save
+end
+
 400.times do |n|
-  mieszkania = ['Czapskich 9/105', 'Pilsudskiego 1/12', 'Zwierzyniecka 9/11', 'Rynek Glowny 1', 'Puszkarska 9/5', 'Kremerowska 1/12', 'Lindego 13D/5',
-   'Mazowiecka 41A'
-  ]
-  Apartament.create(adres: mieszkania.sample).save
+
   Reservation.create(numer: Faker::Number.number(5).to_str,
-                     status: 'aktualne',
-                     zrodlo: ['booking.com', 'airbnb.com', 'manual'].sample,
+                     status: ["Rezerwacja", "Anulowanie"].sample,
+                     zrodlo: ["Booking", "Airbnb", "Expedia", "Bezpośrednia"].sample,
                      kwota: Faker::Number.number(3),
                      komentarz: Faker::Lorem.paragraph(2),
                      sprzatanie: Faker::Lorem.paragraph(2),
-                     # data_zakwaterowania: Faker::Date.forward(0),
                      data_zakwaterowania: Faker::Time.between(DateTime.now + 1, DateTime.now),
-                     godzina_zakwaterowania: Faker::Time.between(DateTime.now + 1, DateTime.now),
-                     # data_wykwaterowania: Faker::Date.forward(10),
                      data_wykwaterowania: Faker::Time.between(DateTime.now + 1, DateTime.now),
-                     godzina_wykwaterowania: Faker::Time.forward(23, :morning),
-                     # apartament: ['Czapskich', 'Lindego', 'Mazowiecka', 'Poznanska'].sample,
                      ilosc_osob: Faker::Number.between(1, 10),
                      pracownik: ['Bartek Kirsz', 'Nikodem Kirsz', 'Anna Kirsz'].sample,
                      klient: Faker::Name.name,

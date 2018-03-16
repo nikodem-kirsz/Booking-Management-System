@@ -1,78 +1,298 @@
-<%= simple_form_for(@reservation) do |f| %>
-  <%= f.error_notification %>
-  <div class="form-actions">
-    <%= f.button :submit, :class => 'btn btn-primary' %>
-    <%= link_to 'Back', reservations_path, :class => 'btn btn-default' %>
-  </div>
-  <br>
-  <div class="form-inputs">
-    <div class="form-group col-lg-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          Informacje o rezerwacji
-        </div>
-        <div class="panel-body">
-          <%= f.input :numer, label: 'Numer referencyjny', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :status, label: 'Status rezerwacji', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :zrodlo, label: 'Źródło rezerwacji', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :kwota, label: 'Kwota do zapłaty', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :komentarz , label: 'Komentarz', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :sprzatanie, label: 'Komentarz dla osoby sprzatajacej', input_html: { class: 'form-control input-sm' } %>
-        </div>
-      </div>
-
+<div id="rezerwacja">
+  <%= simple_form_for(@reservation) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-actions">
+      <%= f.button :submit, "Dodaj rezerwacje", :class => 'btn btn-success' %>
+      <%= link_to 'Powrót', reservations_path, :class => 'btn btn-default' %>
     </div>
-    <div class="form-group col-lg-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          Zakwaterowanie klienta
-        </div>
-        <div class="panel-body">
-          <div class="form-group col-lg-12">
-            <div class="col-lg-7">
-              <div class="input-group date datepickerfrom">
-                <%= f.input :data_zakwaterowania, input_html: { class: 'form-control input-sm' } %>
+    <br>
+    <div class="form-inputs" style="font-size: 14px">
+      <div class="form-group col-lg-4" style="padding-left: 0px ">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Informacje o rezerwacji
+          </div>
+          <div class="panel-body">
+            <%= f.input :numer, label: 'Numer referencyjny', input_html: { class: 'form-control' } %>
+            <%= label(:status, "Status") %>
+            <%= f.select :status, options_for_select(@options[:statusy]), { prompt: ""}, class: 'form-control' %>
+            <br>
+            <%= label(:zrodlo, "Zrodlo") %>
+            <%= f.select :zrodlo, options_for_select(@options[:zrodla]), { prompt: ""}, class: 'form-control' %>
+            <br>
+            <div class="form-group col-lg-12" style="padding-right: 0px; padding-left: 0px">
+              <%= f.label :kwota, "Kwota do zapłaty"  %>
+              <div class="input-group">
+                <%= f.input :kwota, label: false, input_html: { class: 'form-control' } %>
                 <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-calendar"></span>
+                  $
                 </span>
               </div>
             </div>
+            <%= f.input :komentarz , label: 'Komentarz', input_html: { class: 'form-control' } %>
+            <%= f.input :sprzatanie, label: 'Komentarz dla osoby sprzatajacej', input_html: { class: 'form-control' } %>
           </div>
+        </div>
 
-          <%= f.input :godzina_zakwaterowania , label: 'Godzina zakwaterowania', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :data_wykwaterowania, label: 'Data wykwaterowania', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :godzina_wykwaterowania, label: 'Godzina wykwaterowania', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :apartament, label: 'Apartament', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :ilosc_osob , label: 'Ilość osób do zakwaterowania', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :klient , label: 'Klient', input_html: { class: 'form-control input-sm' } %>
+      </div>
+      <div class="form-group col-lg-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Zakwaterowanie klienta
+          </div>
+          <div class="panel-body">
+            <div class="form-group col-lg-12" style="padding-left: 0px">
+              <div class="col-lg-7" style="padding: 0px">
+                <%= label(:data_zakwaterowania, "Data zakwaterowania") %>
+                <div class="input-group datepickerfrom">
+                  <%= text_field_tag :data_zakwaterowania, nil, { value: !@reservation.data_zakwaterowania.nil? ? Date.parse(@reservation.data_zakwaterowania.to_s).strftime("%d.%m.%Y") : '', class: 'form-control datefield' } %>
+                  <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                </div>
+              </div>
+              <div class="col-lg-5" style="padding-left: 35px; padding-right: 0px">
+                <%= label(:godzina_zakwaterowania, "Godzina zakwaterowania") %>
+                <div class="input-group timepickerfrom">
+                  <%= text_field_tag :godzina_zakwaterowania, nil, class: 'form-control', value: !@reservation.data_zakwaterowania.nil? ? Time.zone.parse(@reservation.data_zakwaterowania.to_s).strftime("%H:%M") : '14:00' %>
+                  <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-time"></span>
+                </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group col-lg-12" style="padding-left: 0px">
+              <div class="col-lg-7" style="padding: 0px;">
+                <%= label(:data_wykwaterowania, "Data wykwaterowania") %>
+                <div class="input-group datepickerfrom">
+                  <%= text_field_tag :data_wykwaterowania, nil, { value: !@reservation.data_wykwaterowania.nil? ? Date.parse(@reservation.data_wykwaterowania.to_s).strftime("%d.%m.%Y") : '', class: 'form-control datefield' } %>
+                  <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+                </div>
+              </div>
+              <div class="col-lg-5" style="padding-left: 33px; padding-right: 0px">
+                <%= label(:godzina_wykwaterowania, "Godzina wykwaterowania") %>
+                <div class="input-group timepickerfrom">
+                  <%= text_field_tag :godzina_wykwaterowania, nil, class: 'form-control', value: !@reservation.data_wykwaterowania.nil? ? Time.zone.parse(@reservation.data_wykwaterowania.to_s).strftime("%H:%M") : '11:00' %>
+                  <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-time"></span>
+                </span>
+                </div>
+              </div>
+            </div>
+            <%= label(:apartament, "Apartament") %>
+            <%= f.select :apartament, options_for_select(@options[:apartamenty]), { prompt: ""}, class: 'form-control' %>
+            <br>
+            <%= f.input :ilosc_osob , label: 'Ilość osób do zakwaterowania', input_html: { class: 'form-control', value: 1 } %>
+            <%= label(:apartament, "Klient") %>
+            <div class="col-lg-12" style="padding-left: 0px">
+                <div class="ui-widget">
+                  <%= f.select :klient, options_for_select(Klient.full_names), { prompt: ""}, class: 'form-control', id: 'combobox' %>
+                </div>
+            </div>
+            <div class="col-lg-12"><%= image_tag "spinner.gif", id: "spinnerUpdateKlients", style: 'display:none' %></div>
+            <button class="col-lg-4 btn btn-default dodajKlienta" style="margin-top: 20px">Dodaj klienta</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="form-group col-lg-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Szczegóły zakwaterowania
+          </div>
+          <div class="panel-body">
+            <%= label(:pracownik, "Pracownik odpowiedzialny") %>
+            <%= f.select :pracownik, options_for_select(@options[:pracownicy]), { prompt: ""}, class: 'form-control', value: "" %>
+            <br>
+            <%= label(:oferte_wprowadzil, "Wprowadzil") %>
+            <%= text_field_tag :oferte_wprowadzil, nil, class: 'form-control', value: (current_user.imie if user_signed_in?), disabled: true %>
+            <br>
+            <%= label(:data_wprowadzenia, "Data wprowadzenia") %>
+            <%= text_field_tag :data_wprowadzenia, nil, class: 'form-control', value: Time.now.localtime(), disabled: true %>
+            <br>
+            <%= label(:transport_z_lotniska, "Transport z lotniska") %>
+            <%= f.check_box :transport_z_lotniska %>
+            <button type="button" class="btn btn-default btn-xs" style="" data-toggle="collapse" aria-expanded="true" data-target="#toggleAirportFrom">Więcej</button>
+            <br>
+            <div id="toggleAirportFrom" class="form-group col-lg-12 collapse out" aria-expanded="true" style="padding-left: 0px">
+              <div class="col-lg-7" style="padding: 0px;">
+                <%= label(:godzina_przylotu, "Godzina przylotu") %>
+                <div class="input-group timepickerfrom">
+                  <%= text_field_tag :godzina_przylotu, nil, class: 'form-control', value: !@reservation.godzina_przylotu.nil? ? Time.zone.parse(@reservation.godzina_przylotu.to_s).strftime("%H:%M") : '' %>
+                  <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-time"></span>
+                </span>
+                </div>
+              </div>
+              <div class="col-lg-5" style="padding-left: 33px; padding-right: 0px">
+                <%= f.input :numer_przylotu, label: 'Numer przylotu', input_html: { class: 'form-control' } %>
+              </div>
+              <%= f.input :komentarz_do_transportu_z_lotniska, label: 'Komentarz do transportu z lotniska', input_html: { class: 'form-control' } %>
+            </div>
+            <%= label(:transport_na_lotnisko, "Transport na lotnisko") %>
+            <%= f.check_box :transport_na_lotnisko %>
+            <button type="button" class="btn btn-default btn-xs" style="" data-toggle="collapse" aria-expanded="true" data-target="#toggleAirportTo">Więcej</button>
+            <br>
+            <div id="toggleAirportTo" class="form-group col-lg-12 collapse out" aria-expanded="true" style="padding-left: 0px">
+              <div class="col-lg-7" style="padding: 0px;">
+                <%= label(:godzina_wylotu, "Godzina wylotu") %>
+                <div class="input-group timepickerfrom">
+                  <%= text_field_tag :godzina_wylotu, nil, class: 'form-control', value: !@reservation.godzina_wylotu.nil? ? Time.zone.parse(@reservation.godzina_wylotu.to_s).strftime("%H:%M") : '' %>
+                  <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-time"></span>
+                </span>
+                </div>
+              </div>
+              <div class="col-lg-5" style="padding-left: 33px; padding-right: 0px">
+                <%= f.input :numer_wylotu, label: 'Numer wylotu', input_html: { class: 'form-control' } %>
+              </div>
+              <%= f.input :komentarz_do_transportu_na_lotnisko, label: 'Komentarz do transportu na lotniska', input_html: { class: 'form-control' } %>
+            </div>
+            <%= label(:parking, "Parking") %>
+            <%= f.check_box :parking %>
+            <br>
+            <%= label(:wycieczka, "Wycieczka") %>
+            <%= f.check_box :wycieczka %>
+            <button type="button" class="btn btn-default btn-xs" style="" data-toggle="collapse" data-target="#toggleTrip">Więcej</button>
+            <br>
+            <div id="toggleTrip" class="form-group col-lg-12 collapse out" aria-expanded="true" style="padding-left: 0px">
+              <%= f.input :komentarz_do_wycieczek, label: 'Komentarz do wycieczek', input_html: { class: 'form-control' } %>
+            </div>
+
+            <%= label(:lozeczko_dla_dziecka, "Lozeczko dla dziecka") %>
+            <%= check_box_tag :lozeczko_dla_dziecka, false %>
+            <br>
+          </div>
         </div>
       </div>
 
     </div>
-    <div class="form-group col-lg-4">
-      <div class="panel panel-primary">
+    <div class="form-group col-lg-12">
+      <div class="panel panel-default">
         <div class="panel-heading">
-          Szczegóły zakwaterowania
+          Dodawanie platnosci
         </div>
         <div class="panel-body">
-          <%= f.input :pracownik, label: 'Pracownik odpowiedzialny za zakwaterowanie', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :godzina_przylotu , label: 'Godzina przylotu', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :numer_przylotu, label: 'Numer przylotu', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :komentarz_do_transportu_na_lotnisko, label: 'Komentarz do transportu z lotniska', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :godzina_wylotu, label: 'Godzina wylotu', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :numer_wylotu , label: 'Numer wylotu', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :komentarz_do_transportu_na_lotnisko, label: 'Komentarz do transportu na lotnisko', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :komentarz_do_wycieczek , label: 'Komentarz do wycieczek', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :oferte_wprowadzil, label: 'Ofertę wprowadził', input_html: { class: 'form-control input-sm' } %>
-          <%= f.input :data_wprowadzenia , label: 'Data wprowadzenia do systemu', input_html: { class: 'form-control input-sm' } %>
+          <div class="form-inputs">
+            <div class="col-lg-1">
+              <label class="control-label">Zaliczka</label>
+              <%= text_field_tag :zaliczka, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-1">
+              <label class="control-label">Kwota</label>
+              <%= number_field_tag :kwota, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-1">
+              <label class="control-label">Termin platnosci</label>
+              <%= text_field_tag :termin_platnosci, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-2">
+              <label class="control-label">Konto</label>
+              <%= text_field_tag :konto, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-2">
+              <label class="control-label">Data zapłaty</label>
+              <%= text_field_tag :data_zaplaty, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-1">
+              <label class="control-label">Podatek</label>
+              <%= text_field_tag :podatek, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-1">
+              <label class="control-label">Rodzaj faktury</label>
+              <%= text_field_tag :rodzaj_faktury, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-2">
+              <label class="control-label">Data wystawienia</label>
+              <%= text_field_tag :data_wystawienia, nil, class: 'form-control input valid' %>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+  <% end %>
+</div>
+
+<div id="clientForm" style="font-size: 14px; padding-left:500px; width: 70%" class="form-group col-lg-12 collapse out text-center" aria-expanded="true">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Dodawanie klienta
+      </div>
+      <div class="panel-body text-center">
+        <%= form_tag klients_path, id: 'klients_form', method: :post, remote: true do %>
+          <div class="form-inputs">
+            <div class="col-lg-7">
+              <label class="control-label">Imie</label>
+              <%= text_field_tag :imie, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-5">
+              <label class="control-label">Nazwisko</label>
+              <%= text_field_tag :nazwisko, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-7">
+              <label class="control-label">Numer telefonu</label>
+              <%= text_field_tag :numer_telefonu, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-5">
+              <label class="control-label">Email</label>
+              <%= text_field_tag :email, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-12">
+              <label class="control-label">Nazwa firmy</label>
+              <%= text_field_tag :nazwa_firmy, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-7">
+              <label class="control-label">Ulica</label>
+              <%= text_field_tag :ulica, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-5">
+              <label class="control-label">Miasto</label>
+              <%= text_field_tag :miasto, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-7">
+              <label class="control-label">Numer NIP</label>
+              <%= text_field_tag :numer_nip, nil, class: 'form-control input valid' %>
+            </div>
+            <div class="col-lg-5">
+              <label class="control-label">Kod kraju</label>
+              <%= text_field_tag :kod_kraju, nil, class: 'form-control input valid' %>
+            </div>
+          </div>
+          <div class="col-lg-12"><%= submit_tag 'Dodaj klienta', id: "ajaxSubmit", class: 'btn btn-success' %></div>
+          <div class="col-lg-12"><%= image_tag "spinner.gif", id: "spinner", style: 'display:none' %></div>
+          </div>
+
+        <% end  %>
 
     </div>
+</div>
 
-  </div>
-<% end %>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<style>
+  .custom-combobox {
+    position: relative;
+    display: inline-block;
+  }
+  .custom-combobox-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
+    padding: 0;
+  }
+  .custom-combobox-input {
+    margin: 0;
+    padding: 5px 10px;
+  }
+</style>
 
+<script
+src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+crossorigin="anonymous"></script>
 <script type="text/javascript">
     $(function () {
         $('.datetimepickerfrom').datetimepicker({
@@ -85,4 +305,182 @@
             locale: 'pl'
         });
     });
+    $(function () {
+        $('.timepickerfrom').datetimepicker({
+            format: 'HH:mm',
+            locale: 'pl'
+        });
+    });
+    $(function() {
+        $('.dodajKlienta').on('click', function(e) {
+            e.preventDefault();
+            $('#rezerwacja').toggle();
+            $('#clientForm').toggle();
+
+        });
+    });
+
+    $(document).ready(function() {
+       $("#klients_form").on("ajax:complete", function(event, xhr, settings) {
+               $('#spinner').hide();
+               $('#clientForm').hide();
+               $('#rezerwacja').show();
+               $('#spinnerUpdateKlients').show();
+               $.ajax({
+                  type: "GET",
+                  url: "/klients",
+                  dataType: "json",
+                  success: function(values){
+                      var optionList = document.getElementById('combobox');
+                      for(var i = 0, l = optionList.options.length; i<l; i++ ) {
+                          optionList.remove(i);
+                      }
+                      for(var i = 0, l = values.length; i < l; i++){
+                          optionList.options.add(new Option(values[i]['imie'] + " " + values[i]['nazwisko'], values[i]['imie']));
+                      }
+                      $('#spinnerUpdateKlients').hide();
+                  }
+              });
+       });
+        $("#klients_form").on("ajax:send", function(event, xhr, settings) {
+            $('#spinner').show();
+        });
+    });
+
+    $( function() {
+        $.widget( "custom.combobox", {
+            _create: function() {
+                this.wrapper = $( "<span>" )
+                    .addClass( "custom-combobox" )
+                    .insertAfter( this.element );
+
+                this.element.hide();
+                this._createAutocomplete();
+                this._createShowAllButton();
+            },
+
+            _createAutocomplete: function() {
+                var selected = this.element.children( ":selected" ),
+                    value = selected.val() ? selected.text() : "";
+
+                this.input = $( "<input>" )
+                    .appendTo( this.wrapper )
+                    .val( value )
+                    .attr( "title", "" )
+                    .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+                    .autocomplete({
+                        delay: 0,
+                        minLength: 0,
+                        source: $.proxy( this, "_source" )
+                    })
+                    .tooltip({
+                        classes: {
+                            "ui-tooltip": "ui-state-highlight"
+                        }
+                    });
+
+                this._on( this.input, {
+                    autocompleteselect: function( event, ui ) {
+                        ui.item.option.selected = true;
+                        this._trigger( "select", event, {
+                            item: ui.item.option
+                        });
+                    },
+
+                    autocompletechange: "_removeIfInvalid"
+                });
+            },
+
+            _createShowAllButton: function() {
+                var input = this.input,
+                    wasOpen = false;
+
+                $( "<a>" )
+                    .attr( "tabIndex", -1 )
+                    .attr( "title", "Pokaz wszystkich klientow" )
+                    .tooltip()
+                    .appendTo( this.wrapper )
+                    .button({
+                        icons: {
+                            primary: "ui-icon-triangle-1-s"
+                        },
+                        text: false
+                    })
+                    .removeClass( "ui-corner-all" )
+                    .addClass( "custom-combobox-toggle ui-corner-right" )
+                    .on( "mousedown", function() {
+                        wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+                    })
+                    .on( "click", function() {
+                        input.trigger( "focus" );
+
+                        // Close if already visible
+                        if ( wasOpen ) {
+                            return;
+                        }
+
+                        // Pass empty string as value to search for, displaying all results
+                        input.autocomplete( "search", "" );
+                    });
+            },
+
+            _source: function( request, response ) {
+                var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+                response( this.element.children( "option" ).map(function() {
+                    var text = $( this ).text();
+                    if ( this.value && ( !request.term || matcher.test(text) ) )
+                        return {
+                            label: text,
+                            value: text,
+                            option: this
+                        };
+                }) );
+            },
+
+            _removeIfInvalid: function( event, ui ) {
+
+                // Selected an item, nothing to do
+                if ( ui.item ) {
+                    return;
+                }
+
+                // Search for a match (case-insensitive)
+                var value = this.input.val(),
+                    valueLowerCase = value.toLowerCase(),
+                    valid = false;
+                this.element.children( "option" ).each(function() {
+                    if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+                        this.selected = valid = true;
+                        return false;
+                    }
+                });
+
+                // Found a match, nothing to do
+                if ( valid ) {
+                    return;
+                }
+
+                // Remove invalid value
+                this.input
+                    .val( "" )
+                    .attr( "title", value + " nie znaleziono klienta" )
+                    .tooltip( "open" );
+                this.element.val( "" );
+                this._delay(function() {
+                    this.input.tooltip( "close" ).attr( "title", "" );
+                }, 2500 );
+                this.input.autocomplete( "instance" ).term = "";
+            },
+
+            _destroy: function() {
+                this.wrapper.remove();
+                this.element.show();
+            }
+        });
+
+        $( "#combobox" ).combobox();
+        $( "#toggle" ).on( "click", function() {
+            $( "#combobox" ).toggle();
+        });
+    } );
 </script>

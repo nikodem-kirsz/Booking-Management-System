@@ -1,9 +1,10 @@
 <%= form_tag '/', remote: true do %>
   <div class="col-lg-12" style="padding-left:0px">
-    <div class="form-group col-lg-2">
+    <div class="form-group col-lg-2" style="padding-left: 0px">
       <div style="display:flex;flex-direction:row;">
         <%= text_field_tag :szukaj, nil, class: 'form-control input valid', placeholder: 'Szukaj rezerwacji' %>
         <%= submit_tag 'Szukaj', class: 'btn btn-success ajaxSubmit' %>
+        <span class="glyphicon glyphicon-search"></span>
       </div>
     </div>
     <div class="col-lg-2">
@@ -14,29 +15,29 @@
   <div id="filtry">
     <div class="col-lg-12" style="padding-left:0px">
 
-      <div class="form-group col-lg-2">
+      <div class="form-group col-lg-2" style="padding-left:0px">
         <label class="control-label">Apartamenty</label>
-        <%= select_tag :apartament, options_for_select(@apartamenty.unshift('--Wszystkie--'), params[:apartament]), :class => 'form-control input-sm valid selectfield' %>
+        <%= select_tag :apartament, options_for_select(@options[:apartamenty].unshift('--Wszystkie--'), params[:apartament]), :class => 'form-control input-sm valid selectfield' %>
       </div>
       <div class="form-group col-lg-2">
         <label class="control-label">Zrodla rezerwacji</label>
-        <%= select_tag :zrodlo, options_for_select(@zrodla.unshift('--Wszystkie--'), params[:zrodlo]), :class => 'form-control input-sm valid selectfield' %>
+        <%= select_tag :zrodlo, options_for_select(@options[:zrodla].unshift('--Wszystkie--'), params[:zrodlo]), :class => 'form-control input-sm valid selectfield' %>
       </div>
       <div class="form-group col-lg-2">
         <label class="control-label">Statusy</label>
-        <%= select_tag :status, options_for_select(@statusy.unshift('--Wszystkie--'), params[:status]), :class => 'form-control input-sm valid selectfield' %>
+        <%= select_tag :status, options_for_select(@options[:statusy].unshift('--Wszystkie--'), params[:status]), :class => 'form-control input-sm valid selectfield' %>
       </div>
       <div class="form-group col-lg-2">
         <label class="control-label">Wprowadzone przez</label>
-        <%= select_tag :oferte_wprowadzil, options_for_select(@pracownicy.unshift('--Wszystkie--'), params[:oferte_wprowadzil]), :class => 'form-control input-sm valid selectfield' %>
+        <%= select_tag :oferte_wprowadzil, options_for_select(@options[:pracownicy].unshift('--Wszystkie--'), params[:oferte_wprowadzil]), :class => 'form-control input-sm valid selectfield' %>
       </div>
       <div class="form-group col-lg-2">
         <label class="control-label">Odpowiedzialny pracownik</label>
-        <%= select_tag :pracownik, options_for_select(@pracownicy, params[:pracownik]), :class => 'form-control input-sm valid selectfield' %>
+        <%= select_tag :pracownik, options_for_select(@options[:pracownicy], params[:pracownik]), :class => 'form-control input-sm valid selectfield' %>
       </div>
     </div>
     <div class="col-lg-12" style="padding-left:0px">
-      <div class="form-group col-lg-2">
+      <div class="form-group col-lg-2" style="padding-left:0px">
         <label class="control-label">Data zakwaterowania od</label>
         <div class="input-group date datetimepickerfrom">
           <%= text_field_tag :data_zakwaterowania_od, nil, class: 'form-control input-sm valid datefield', placeholder: 'Data zakwaterowania od' %>
@@ -92,15 +93,16 @@
           </div>
         </div>
       </div>
-      <div class="form-group col-lg-12" style="left:43%">
+      <br>
+      <div class="col-lg-12 text-center">
         <%= submit_tag 'Szukaj rezerwacji', class: 'btn btn-success ajaxSubmit' %>
       </div>
     </div>
   </div>
-  <div class="col-lg-12" style="left:45%">
+  <div class="col-lg-12 text-center">
+    <br>
     <%= image_tag "spinner.gif", id: "spinner", style: 'display:none' %>
   </div>
-
 <% end %>
 
 <script type="text/javascript">

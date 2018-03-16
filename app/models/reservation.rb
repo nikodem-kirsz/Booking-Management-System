@@ -1,5 +1,10 @@
 class Reservation < ApplicationRecord
   belongs_to :apartament
+  has_many :platnoscs
+
+  validates_presence_of :numer, :status, :zrodlo, :kwota, :data_zakwaterowania, :data_wykwaterowania, :apartament, :ilosc_osob, :pracownik, :klient, :apartament_id
+  validates_numericality_of :ilosc_osob, greater_than: 0
+  validates :numer, :uniqueness => true
 
   def self.search_reservations(params)
 
@@ -54,7 +59,7 @@ class Reservation < ApplicationRecord
     end
 
     if  !params[:apartament].present? || params[:apartament] == "--Wszystkie--"
-      return reservations.select("*").joins("INNER JOIN apartaments ON apartaments.id = reservations.apartament_id")
+      return reservations.all.includes(:apartament)
     else
       return reservations
     end

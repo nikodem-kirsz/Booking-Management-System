@@ -1,0 +1,2 @@
+module PlatnoscsHelper
+end
