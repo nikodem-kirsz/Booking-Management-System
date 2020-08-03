@@ -1,6 +1,3 @@
 # Booking-Management-System
 
-http://hashtag-apartments.herokuapp.com
-
-username: admin
-password: admin
+System for orchestrating reservation in numerous hotel rooms or apartments with client tracking and filters.
