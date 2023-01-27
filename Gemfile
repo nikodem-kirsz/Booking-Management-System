@@ -31,7 +31,7 @@ gem 'devise'
 gem 'bcrypt', '~> 3.1', '>= 3.1.11', platforms: :ruby
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'jquery-rails'
-gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
+gem 'jquery-ui-rails', '~> 6.0'
 gem 'simple_form'
 gem 'faker', '~> 1.6', '>= 1.6.3'
 gem 'prawn', '~> 2.1'
